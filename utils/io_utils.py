@@ -20,10 +20,10 @@ def write_xyz(x_array, molecule_ids, element_sequences, filename):
 
 def read_xyz_multimol(file_path):
     """
-    Reads a multi-molecule XYZ file and returns a tuple:
+    Reads a multi-molecule XYZ file and returns:
       (molecules, element_sequences)
-    Each molecule is a list of [x, y, z] coordinates (one per atom),
-    and element_sequences is a list of space-separated element symbols.
+    Each molecule is a list of [x, y, z] coordinates, and element_sequences is a list
+    of space-separated element symbols.
     """
     molecules = []
     elem_sequences = []
