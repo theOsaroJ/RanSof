@@ -1,7 +1,6 @@
 {
   "funnel": ["LDA", "PBE", "r2SCAN", "B3LYP", "CCSD", "DMRG"],
   "simulation_commands": {
-    "LDA": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mlda --xc LDA --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
     "PBE": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mpbe --xc PBE --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
     "r2SCAN": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mr2scan --xc r2SCAN --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
     "B3LYP": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mb3lyp --xc B3LYP --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
@@ -19,8 +18,9 @@
   },
   "paths": {
     "input_xyz": "smol.xyz",
+    "initial_energy_file": "user_data/lda_energy.dat",
+    "initial_forces_file": "user_data/lda_force.dat",
     "output_dir": "output",
-    "logs_dir": "logs",
-    "initial_data_file": "initial_training_data.csv"
+    "logs_dir": "logs"
   }
 }
