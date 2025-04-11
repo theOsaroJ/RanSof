@@ -9,4 +9,4 @@ python3 analysis.py --xyz smol.xyz --actual_dir actual_data  --pred_dir output -
 
 python3 analysis_ref.py --xyz smol.xyz --actual_dir actual_data --pred_dir output --ref_dir Gstate --methods PBE r2SCAN B3LYP CCSD --output_dir analysis_output_normalized > 2_output.txt
 
-python3 plot_pes_forces.py --xyz smol.xyz  --merged_dir analysis_output --output_dir plot_pes --subtract_ref true  --ref_dir Gstate --atom1 0 --atom2 1 --methods PBE r2SCAN B3LYP CCSD > 3_output.txt
+python3 plot_pes_forces.py --xyz smol.xyz  --merged_dir analysis_output --output_dir plot_pes --subtract_ref true  --ref_dir Gstate --atom1 0 --atom2 1 --methods PBE r2SCAN B3LYP CCSD --force_dims 3 > 3_output.txt
