@@ -147,8 +147,8 @@ def active_learning_correction(lower_level, higher_level, X_candidate, X_geom_al
                     new_hiF = load_latest_value(os.path.join(sp, f"{hi_pref}_force.dat"), (1, n_atoms * 3))
                 # For CCSD/DMRG transitions, compute target delta as – (simulated – lower)
                 if higher_level in ["CCSD", "DMRG"]:
-                    deltaE =  (new_hiE - new_loE)
-                    deltaF =  (new_hiF - new_loF)
+                    deltaE = - (new_hiE - new_loE)
+                    deltaF = - (new_hiF - new_loF)
                 else:
                     deltaE = new_hiE - new_loE
                     deltaF = new_hiF - new_loF
@@ -285,8 +285,8 @@ def run_workflow(config):
         if os.path.exists(train_xyz):
             os.remove(train_xyz)
         if higher in ["CCSD", "DMRG"]:
-            deltaE_train =  (nextE - final_E[lower][train_idx, :])
-            deltaF_train =  (nextF - final_F[lower][train_idx, :])
+            deltaE_train = - (nextE - final_E[lower][train_idx, :])
+            deltaF_train = - (nextF - final_F[lower][train_idx, :])
         else:
             deltaE_train = nextE - final_E[lower][train_idx, :]
             deltaF_train = nextF - final_F[lower][train_idx, :]
@@ -348,8 +348,8 @@ def run_workflow(config):
         E_pred_full, _ = gp_en.predict(X_features)
         F_pred_full, _ = gp_fr.predict(X_features)
         if higher in ["CCSD", "DMRG"]:
-            E_pred_full = E_pred_full
-            F_pred_full = F_pred_full
+            E_pred_full = -E_pred_full
+            F_pred_full = -F_pred_full
         final_E[higher] = final_E[lower] + E_pred_full
         final_F[higher] = final_F[lower] + F_pred_full
         
@@ -364,8 +364,8 @@ def run_workflow(config):
         pred_delta_E, _ = gp_en.predict(X_candidate)
         pred_delta_F, _ = gp_fr.predict(X_candidate)
         if higher in ["CCSD", "DMRG"]:
-            pred_delta_E = pred_delta_E
-            pred_delta_F = pred_delta_F
+            pred_delta_E = -pred_delta_E
+            pred_delta_F = -pred_delta_F
         final_E_unlabeled = Y_candidate_E + pred_delta_E
         final_F_unlabeled = Y_candidate_F + pred_delta_F
         np.savetxt(os.path.join(outdir, f"predicted_energy_{higher}_unlabeled.dat"), final_E_unlabeled, fmt="%.8f")
