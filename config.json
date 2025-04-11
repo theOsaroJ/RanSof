@@ -1,20 +1,31 @@
 {
-  "funnel": ["LDA", "PBE", "r2SCAN", "B3LYP", "CCSD", "DMRG"],
+  "funnel": ["LDA", "PBE", "r2SCAN", "B3LYP", "CCSD"],
   "simulation_commands": {
-    "PBE": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mpbe --xc PBE --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
-    "r2SCAN": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mr2scan --xc r2SCAN --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
-    "B3LYP": "python simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mb3lyp --xc B3LYP --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
-    "CCSD": "python simulation/generate_ccsd.py {xyz} --save_path simulation_data --name_molecule mccsd --basisset 6311g --n_workers 1",
-    "DMRG": "python simulation/generate_dmrg.py {xyz} --save_path simulation_data --name_molecule mdmrg --basisset 6311g --num_orbitals 6 --num_electrons 6 --max_dmrg_bond_dimension 100 --max_dmrg_iterations 500 --n_workers 1 --verbose 0"
+    "PBE": "python3 simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mpbe --xc PBE --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
+    "r2SCAN": "python3 simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mr2scan --xc r2SCAN --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
+    "B3LYP": "python3 simulation/generate_dft.py {xyz} --save_path simulation_data --name_molecule mb3lyp --xc B3LYP --basisset 6311g --n_workers 1 --grid_level 6 --spin 0 --charge 0 --fd_delta 0.001",
+    "CCSD": "python3 simulation/generate_ccsd.py {xyz} --save_path simulation_data --name_molecule mccsd --basisset 6311g --n_workers 1"
   },
   "active_learning": {
-    "al_iterations_per_level": { "PBE": 5, "r2SCAN": 3, "B3LYP": 5, "CCSD": 3, "DMRG": 2 },
+    "al_iterations_per_level": {
+      "PBE": 30,
+      "r2SCAN": 20,
+      "B3LYP": 10,
+      "CCSD": 7
+    },
+    "n_training_points": {
+      "LDA": 0,
+      "PBE": 30,
+      "r2SCAN": 20,
+      "B3LYP": 15,
+      "CCSD": 5
+    },
     "window_size": 3,
     "convergence_tolerance": 0.001,
     "num_new_points": 1,
     "min_std_threshold": 0.001,
     "default_uncertainty_threshold": 0.01,
-    "acquisition_method": "std"
+    "acquisition_method": "max_combined_uncertainty"
   },
   "paths": {
     "input_xyz": "smol.xyz",
