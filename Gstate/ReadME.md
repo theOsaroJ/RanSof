@@ -1,1 +1,1 @@
-This file contains the energies and forces of smol.xyz
+This file contains the energies and forces of the ground state configuration
